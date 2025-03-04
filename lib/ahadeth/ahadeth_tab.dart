@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:islami_app_final/ahadeth/hadeth_name_item.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:islami_app_final/ahadeth/hadeth_name_item.dart';
+import 'package:provider/provider.dart';
+
 import '../color_app.dart';
+import '../provider/app_config_provider.dart';
 
 class AhadethTab extends StatefulWidget {
   @override
@@ -19,11 +22,13 @@ class _AhadethTabState extends State<AhadethTab> {
   }
 
   Widget build(BuildContext context) {
+    var provider = Provider.of<AppConfigProvider>(context);
+
     return Column(
       children: [
         Expanded(flex: 1, child: Image.asset('assets/images/ahadeth_logo.png')),
         Divider(
-          color: AppColor.primaryLight,
+          color: provider.isDark() ? AppColor.yellow : AppColor.primaryLight,
           thickness: 3,
         ),
         Text(
@@ -31,7 +36,7 @@ class _AhadethTabState extends State<AhadethTab> {
           style: Theme.of(context).textTheme.labelLarge,
         ),
         Divider(
-          color: AppColor.primaryLight,
+          color: provider.isDark() ? AppColor.yellow : AppColor.primaryLight,
           thickness: 3,
         ),
         Expanded(

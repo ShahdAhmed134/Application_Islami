@@ -31,4 +31,33 @@ class ThemeApp {
             fontWeight: FontWeight.w400,
             color: AppColor.blackColor),
       ));
+  static final ThemeData DarkTheme = ThemeData(
+      primaryColor: AppColor.primaryDark,
+      scaffoldBackgroundColor: Colors.transparent,
+      appBarTheme: AppBarTheme(
+          elevation: 0, backgroundColor: Colors.transparent, centerTitle: true),
+      bottomNavigationBarTheme:
+          BottomNavigationBarThemeData(selectedItemColor: AppColor.yellow),
+      textTheme: TextTheme(
+        titleLarge: TextStyle(
+            fontSize: 30,
+            fontWeight: FontWeight.bold,
+            color: AppColor.whiteColor),
+        labelLarge: TextStyle(
+            fontSize: 25,
+            fontWeight: FontWeight.w600,
+            color: AppColor.whiteColor),
+        bodyLarge: TextStyle(
+            fontSize: 22,
+            fontWeight: FontWeight.bold,
+            color: AppColor.whiteColor),
+        titleMedium: TextStyle(
+            fontSize: 25,
+            fontWeight: FontWeight.bold,
+            color: AppColor.whiteColor),
+        displayMedium: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.w400,
+            color: AppColor.whiteColor),
+      ));
 }

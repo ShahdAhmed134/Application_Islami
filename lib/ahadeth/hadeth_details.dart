@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:islami_app_final/ahadeth/ahadeth_tab.dart';
 import 'package:islami_app_final/color_app.dart';
+import 'package:provider/provider.dart';
+
+import '../provider/app_config_provider.dart';
 
 class HadethDetails extends StatefulWidget {
   static const String routeName = 'hadeth';
@@ -12,10 +15,19 @@ class HadethDetails extends StatefulWidget {
 class _HadethDetailsState extends State<HadethDetails> {
   @override
   Widget build(BuildContext context) {
+    var provider = Provider.of<AppConfigProvider>(context);
+
     var args = ModalRoute.of(context)?.settings.arguments as Hadeth;
 
     return Stack(children: [
-      Image.asset(
+      provider.isDark()
+          ? Image.asset(
+              'assets/images/main_background_dark.png',
+              width: double.infinity,
+              height: double.infinity,
+              fit: BoxFit.fill,
+            )
+          : Image.asset(
         'assets/images/background_light.png',
         width: double.infinity,
         height: double.infinity,
@@ -40,7 +52,9 @@ class _HadethDetailsState extends State<HadethDetails> {
             bottom: MediaQuery.of(context).size.height * 0.1,
           ),
           decoration: BoxDecoration(
-              color: Color(0xccffffff),
+              color: provider.isDark()
+                  ? AppColor.primaryDark
+                  : AppColor.whiteColor,
               borderRadius: BorderRadius.circular(13)),
           child: Column(
             children: [
@@ -53,14 +67,25 @@ class _HadethDetailsState extends State<HadethDetails> {
                         padding: const EdgeInsets.only(right: 15.0),
                         child: Text(
                           args.title,
-                          style: Theme.of(context).textTheme.titleMedium,
+                          style: provider.isDark()
+                              ? Theme.of(context)
+                                  .textTheme
+                                  .titleMedium
+                                  ?.copyWith(color: AppColor.yellow)
+                              : Theme.of(context).textTheme.titleMedium,
                         ),
                       ),
-                      Icon(Icons.play_circle)
+                      Icon(
+                        Icons.play_circle,
+                        color: provider.isDark()
+                            ? AppColor.yellow
+                            : AppColor.whiteColor,
+                      )
                     ],
                   )),
               Divider(
-                color: AppColor.primaryLight,
+                color:
+                    provider.isDark() ? AppColor.yellow : AppColor.primaryLight,
                 thickness: 3,
                 indent: MediaQuery.of(context).size.width * 0.07,
                 endIndent: MediaQuery.of(context).size.width * 0.07,
@@ -72,7 +97,12 @@ class _HadethDetailsState extends State<HadethDetails> {
                       args.content[index],
                       textAlign: TextAlign.center,
                       textDirection: TextDirection.rtl,
-                      style: Theme.of(context).textTheme.displayMedium,
+                      style: provider.isDark()
+                          ? Theme.of(context)
+                              .textTheme
+                              .displayMedium
+                              ?.copyWith(color: AppColor.yellow)
+                          : Theme.of(context).textTheme.displayMedium,
                     );
                   },
                   itemCount: args.content.length,

@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:islami_app_final/color_app.dart';
+import 'package:provider/provider.dart';
+
+import '../provider/app_config_provider.dart';
 
 class SebhaTab extends StatefulWidget {
   @override
@@ -18,6 +22,8 @@ class _SebhaTabState extends State<SebhaTab> {
   ];
 
   Widget build(BuildContext context) {
+    var provider = Provider.of<AppConfigProvider>(context);
+
     return SizedBox(
       width: double.infinity,
       child: Column(
@@ -34,29 +40,38 @@ class _SebhaTabState extends State<SebhaTab> {
                     bottom: MediaQuery.of(context).size.height * 0.04),
                 child: Transform.rotate(
                   angle: _angle,
-                  child: Image.asset(
-                    'assets/images/body_of_sebha.png',
+                  child: provider.isDark()
+                      ? Image.asset(
+                          'assets/images/dark_body_of_seb7a.png',
+                        )
+                      : Image.asset(
+                          'assets/images/body_of_sebha.png',
                   ),
                 ),
               ),
               Padding(
                 padding: EdgeInsets.only(
                     left: MediaQuery.of(context).size.height * 0.05),
-                child: Image.asset(
-                  'assets/images/head_of_sebha.png',
+                child: provider.isDark()
+                    ? Image.asset(
+                        'assets/images/dark_head_of_seb7a.png',
+                      )
+                    : Image.asset(
+                        'assets/images/head_of_sebha.png',
                 ),
               )
             ]),
           ),
           Text(
-            'number of tasbeh',
+            AppLocalizations.of(context)!.counter,
             style: Theme.of(context).textTheme.labelLarge,
           ),
           Container(
             padding: EdgeInsets.all(15),
             margin: EdgeInsets.all(10),
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15), color: AppColor.gold),
+                borderRadius: BorderRadius.circular(15),
+                color: provider.isDark() ? AppColor.yellow : AppColor.gold),
             child: Text(
               '$counter',
               style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
@@ -67,7 +82,9 @@ class _SebhaTabState extends State<SebhaTab> {
             margin: EdgeInsets.all(10),
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(30),
-                color: AppColor.primaryLight),
+                color: provider.isDark()
+                    ? AppColor.yellow
+                    : AppColor.primaryLight),
             child: Text(
               azkar[index],
               style: TextStyle(
