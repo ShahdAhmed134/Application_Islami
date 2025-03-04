@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:islami_app_final/color_app.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class QuranDetails extends StatefulWidget {
   static const String routeName = 'quran';
@@ -28,7 +29,7 @@ class _QuranDetailsState extends State<QuranDetails> {
       Scaffold(
         appBar: AppBar(
           title: Text(
-            'Islami',
+            AppLocalizations.of(context)!.app_title,
             style: Theme.of(context).textTheme.titleLarge,
           ),
         ),
