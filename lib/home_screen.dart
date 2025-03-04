@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:islami_app_final/ahadeth/ahadeth_tab.dart';
+import 'package:islami_app_final/provider/app_config_provider.dart';
 import 'package:islami_app_final/quran/quran_tab.dart';
 import 'package:islami_app_final/radio/radio_tab.dart';
 import 'package:islami_app_final/sebha/sebha_tab.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:islami_app_final/setting/setting_tab.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String routeName = 'home';
@@ -17,9 +20,17 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var provider = Provider.of<AppConfigProvider>(context);
     return Stack(
       children: [
-        Image.asset(
+        provider.isDark()
+            ? Image.asset(
+                'assets/images/main_background_dark.png',
+                width: double.infinity,
+                height: double.infinity,
+                fit: BoxFit.fill,
+              )
+            : Image.asset(
           'assets/images/background_light.png',
           width: double.infinity,
           height: double.infinity,
@@ -55,6 +66,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 BottomNavigationBarItem(
                     icon: ImageIcon(AssetImage('assets/images/radio_icon.png')),
                     label: AppLocalizations.of(context)!.radio),
+                BottomNavigationBarItem(
+                    icon: Icon(Icons.settings),
+                    label: AppLocalizations.of(context)!.setting),
               ],
             ),
           ),
@@ -64,5 +78,11 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  List<Widget> Tabs = [QuranTab(), AhadethTab(), SebhaTab(), RadioTab()];
+  List<Widget> Tabs = [
+    QuranTab(),
+    AhadethTab(),
+    SebhaTab(),
+    RadioTab(),
+    SettingTab()
+  ];
 }
