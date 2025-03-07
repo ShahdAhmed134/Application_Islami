@@ -12,7 +12,7 @@ class SebhaTab extends StatefulWidget {
 
 class _SebhaTabState extends State<SebhaTab> {
   @override
-  int counter = 0, index = 0;
+  int counter = 0, index = 0, totalCounter = 0;
   double _angle = 0;
   List<String> azkar = [
     "سبحان اللّه",
@@ -66,16 +66,32 @@ class _SebhaTabState extends State<SebhaTab> {
             AppLocalizations.of(context)!.counter,
             style: Theme.of(context).textTheme.labelLarge,
           ),
-          Container(
-            padding: EdgeInsets.all(15),
-            margin: EdgeInsets.all(10),
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15),
-                color: provider.isDark() ? AppColor.yellow : AppColor.gold),
-            child: Text(
-              '$counter',
-              style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-            ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                padding: EdgeInsets.all(15),
+                margin: EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15),
+                    color: provider.isDark() ? AppColor.yellow : AppColor.gold),
+                child: Text(
+                  '$counter',
+                  style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                ),
+              ),
+              Container(
+                padding: EdgeInsets.all(15),
+                margin: EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15),
+                    color: provider.isDark() ? AppColor.yellow : AppColor.gold),
+                child: Text(
+                  '$totalCounter',
+                  style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                ),
+              ),
+            ],
           ),
           Container(
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
@@ -87,25 +103,25 @@ class _SebhaTabState extends State<SebhaTab> {
                     : AppColor.primaryLight),
             child: Text(
               azkar[index],
-              style: TextStyle(
-                  fontSize: 25,
-                  fontWeight: FontWeight.bold,
-                  color: AppColor.whiteColor),
-            ),
-          )
+                style: Theme.of(context).textTheme.labelLarge),
+          ),
         ],
       ),
     );
   }
 
   void onClick() {
-    if (counter % 33 == 0) {
+    if (counter == 33) {
       index++;
+      counter = 0;
     }
     if (index == azkar.length) {
       index = 0;
     }
     counter++;
+    // if(counter%33==0){
+    totalCounter++;
+    // }
     _angle += 360 / 6;
     setState(() {});
   }

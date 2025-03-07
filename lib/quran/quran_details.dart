@@ -67,23 +67,22 @@ class _QuranDetailsState extends State<QuranDetails> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.only(right: 15.0),
-                        child: Text(
-                          args.name,
-                          style: provider.isDark()
-                              ? Theme.of(context)
-                                  .textTheme
-                                  .titleMedium
-                                  ?.copyWith(color: AppColor.yellow)
-                              : Theme.of(context).textTheme.titleMedium,
-                        ),
+                      Text(args.name,
+                          style: Theme.of(context)
+                              .textTheme
+                              .labelMedium
+                              ?.copyWith(
+                                  color: provider.isDark()
+                                      ? AppColor.yellow
+                                      : AppColor.blackColor)),
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.08,
                       ),
                       Icon(
                         Icons.play_circle,
                         color: provider.isDark()
                             ? AppColor.yellow
-                            : AppColor.whiteColor,
+                            : AppColor.blackColor,
                       )
                     ],
                   )),
@@ -109,12 +108,7 @@ class _QuranDetailsState extends State<QuranDetails> {
                             '${suraContent[index]}(${index + 1})',
                             textAlign: TextAlign.center,
                             textDirection: TextDirection.rtl,
-                            style: provider.isDark()
-                                ? Theme.of(context)
-                                    .textTheme
-                                    .displayMedium
-                                    ?.copyWith(color: AppColor.yellow)
-                                : Theme.of(context).textTheme.displayMedium,
+                            style: Theme.of(context).textTheme.bodyLarge,
                           );
                         },
                         itemCount: suraContent.length,
@@ -127,14 +121,22 @@ class _QuranDetailsState extends State<QuranDetails> {
     ]);
   }
 
+//   void loadFile(int index) async {
+//     String content =
+//         await rootBundle.loadString('assets/files/${index + 1}.txt');
+//     List<String> lines = content.split('\n');
+//     suraContent = lines;
+//     setState(() {});
+//   }
   void loadFile(int index) async {
     String content =
         await rootBundle.loadString('assets/files/${index + 1}.txt');
     List<String> lines = content.split('\n');
-    for (int i = 0; i < lines.length; i++) {
-      print(lines[i]);
-    }
-    suraContent = lines;
+
+    // إزالة آخر مسافة في كل سطر
+    List<String> modifiedLines = lines.map((line) => line.trimRight()).toList();
+
+    suraContent = modifiedLines;
     setState(() {});
   }
 }

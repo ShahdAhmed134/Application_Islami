@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:islami_app_final/ahadeth/ahadeth_tab.dart';
 import 'package:islami_app_final/color_app.dart';
 import 'package:provider/provider.dart';
@@ -36,7 +37,7 @@ class _HadethDetailsState extends State<HadethDetails> {
       Scaffold(
         appBar: AppBar(
           title: Text(
-            'Islami',
+            AppLocalizations.of(context)!.app_title,
             style: Theme.of(context).textTheme.titleLarge,
           ),
         ),
@@ -58,31 +59,11 @@ class _HadethDetailsState extends State<HadethDetails> {
               borderRadius: BorderRadius.circular(13)),
           child: Column(
             children: [
-              Padding(
-                  padding: const EdgeInsets.only(top: 8.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(right: 15.0),
-                        child: Text(
-                          args.title,
-                          style: provider.isDark()
-                              ? Theme.of(context)
-                                  .textTheme
-                                  .titleMedium
-                                  ?.copyWith(color: AppColor.yellow)
-                              : Theme.of(context).textTheme.titleMedium,
-                        ),
-                      ),
-                      Icon(
-                        Icons.play_circle,
-                        color: provider.isDark()
-                            ? AppColor.yellow
-                            : AppColor.whiteColor,
-                      )
-                    ],
-                  )),
+              Text(args.title,
+                  style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                      color: provider.isDark()
+                          ? AppColor.yellow
+                          : AppColor.blackColor)),
               Divider(
                 color:
                     provider.isDark() ? AppColor.yellow : AppColor.primaryLight,
@@ -97,12 +78,7 @@ class _HadethDetailsState extends State<HadethDetails> {
                       args.content[index],
                       textAlign: TextAlign.center,
                       textDirection: TextDirection.rtl,
-                      style: provider.isDark()
-                          ? Theme.of(context)
-                              .textTheme
-                              .displayMedium
-                              ?.copyWith(color: AppColor.yellow)
-                          : Theme.of(context).textTheme.displayMedium,
+                      style: Theme.of(context).textTheme.bodyLarge,
                     );
                   },
                   itemCount: args.content.length,

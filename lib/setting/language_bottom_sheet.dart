@@ -50,12 +50,11 @@ class _LanguageBottomSheetState extends State<LanguageBottomSheet> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(
-          text,
-          style: TextStyle(
-              color:
-                  provider.isDark() ? AppColor.yellow : AppColor.primaryLight),
-        ),
+        Text(text,
+            style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                color: provider.isDark()
+                    ? AppColor.yellow
+                    : AppColor.primaryLight)),
         Icon(
           Icons.check,
           color: AppColor.primaryLight,
@@ -66,9 +65,6 @@ class _LanguageBottomSheetState extends State<LanguageBottomSheet> {
 
   Widget getUnSelectedItem(String text) {
     return Text(
-      text,
-      style: TextStyle(
-          color: provider.isDark() ? AppColor.whiteColor : AppColor.blackColor),
-    );
+      text, style: Theme.of(context).textTheme.bodySmall);
   }
 }

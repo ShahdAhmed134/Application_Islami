@@ -20,13 +20,13 @@ class SuraNameItem extends StatelessWidget {
               child: Text(
             name,
             textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.bodyLarge,
+            style: Theme.of(context).textTheme.labelMedium,
           )),
           Expanded(
             child: Text(
               number,
               textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.bodyLarge,
+              style: Theme.of(context).textTheme.labelMedium,
             ),
           )
         ],
