@@ -30,9 +30,9 @@ class _SettingTabState extends State<SettingTab> {
             style: provider.isDark()
                 ? Theme.of(context)
                     .textTheme
-                    .displayMedium
+                    .labelLarge
                     ?.copyWith(color: AppColor.yellow)
-                : Theme.of(context).textTheme.displayMedium,
+                : Theme.of(context).textTheme.labelLarge,
           ),
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.02,
@@ -53,8 +53,15 @@ class _SettingTabState extends State<SettingTab> {
                   children: [
                     Text(provider.appLanguage == 'en'
                         ? AppLocalizations.of(context)!.english
-                        : AppLocalizations.of(context)!.arabic),
-                    Icon(Icons.arrow_drop_down)
+                          : AppLocalizations.of(context)!.arabic,
+                      style: Theme.of(context).textTheme.bodySmall,
+                    ),
+                    Icon(
+                      Icons.arrow_drop_down,
+                      color: provider.isDark()
+                          ? AppColor.whiteColor
+                          : AppColor.blackColor,
+                    )
                   ],
                 ),
               )),
@@ -66,9 +73,9 @@ class _SettingTabState extends State<SettingTab> {
             style: provider.isDark()
                 ? Theme.of(context)
                     .textTheme
-                    .displayMedium
+                    .labelLarge
                     ?.copyWith(color: AppColor.yellow)
-                : Theme.of(context).textTheme.displayMedium,
+                : Theme.of(context).textTheme.labelLarge,
           ),
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.02,
@@ -89,8 +96,15 @@ class _SettingTabState extends State<SettingTab> {
                   children: [
                     Text(provider.isDark()
                         ? AppLocalizations.of(context)!.dark
-                        : AppLocalizations.of(context)!.light),
-                    Icon(Icons.arrow_drop_down)
+                          : AppLocalizations.of(context)!.light,
+                      style: Theme.of(context).textTheme.bodySmall,
+                    ),
+                    Icon(
+                      Icons.arrow_drop_down,
+                      color: provider.isDark()
+                          ? AppColor.whiteColor
+                          : AppColor.blackColor,
+                    )
                   ],
                 ),
               )),
@@ -115,7 +129,6 @@ class _SettingTabState extends State<SettingTab> {
         builder: (context) => ThemeBottomSheet(),
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.vertical(top: Radius.circular(40))),
-        backgroundColor:
-            provider.isDark() ? AppColor.primaryDark : AppColor.whiteColor);
+    );
   }
 }
